@@ -34,26 +34,31 @@ The **AI-Powered Outbound Voice Agent** is a cutting-edge solution designed to s
 ```bash
 git clone https://github.com/your-repo/ai-debt-collection-agent.git
 cd ai-debt-collection-agent
+```
 
 ### 2. Install Dependencies for root folder and `server` folder
 ```bash
 npm install
+```
 
 ### 3. Set Up Environment Variables
 Create a `.env` file in the root directory and add your API keys:
 ```bash
 VITE_SERVER_API=http://localhost:1234/v1
+```
 
 Create a `.env` file in the root directory of `server` folder and add your API keys:
 ```bash
 PORT=1234
 OPEN_API_KEY=
+```
 
 ### 4. Run the Backend Server
 ```bash
 node index.js
-
+```
 
 ### 5. Run the Frontend with Vite
 ```bash
 npx vite
+```
