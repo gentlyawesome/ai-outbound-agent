@@ -8,7 +8,7 @@ var morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 
 // openai
-const { analyzeUserInput } = require("./lib/openai");
+const { analyzeUserInput, resetChatHistory } = require("./lib/openai");
 
 // rate limiter
 const limiter = rateLimit({
@@ -50,8 +50,21 @@ const createAIResult = (analyze) => {
   };
 };
 
+const createResetResult = () => {
+  return async (req, res) => {
+    try {
+      resetChatHistory();
+
+      res.status(200).json({ message: "Chat history has been reset" });
+    } catch (err) {
+      res.status(500).json({ message: "Sorry, something went wrong" });
+    }
+  };
+};
+
 // routes
 app.post("/v1/ai", createAIResult(analyzeUserInput));
+app.post("/v1/reset", createResetResult());
 
 // listen
 app.listen(port, () => {

@@ -5,7 +5,7 @@ const client = new OpenAI({
   apiKey: process.env.OPEN_API_KEY,
 });
 
-const chatHistory = [
+let chatHistory = [
   {
     role: "system",
     content: `
@@ -21,7 +21,7 @@ const analyzeUserInput = async (text) => {
 
   const response = await client.chat.completions.create({
     model: "gpt-4o",
-    messages : chatHistory,
+    messages: chatHistory,
     max_tokens: 100,
     temperature: 0.5,
     top_p: 1,
@@ -33,7 +33,30 @@ const analyzeUserInput = async (text) => {
 
   chatHistory.push({ role: "system", content: botReply });
 
-  return botReply; 
+  return botReply;
 };
 
-module.exports = { analyzeUserInput };
+const resetChatHistory = () => {
+  chatHistory = [
+    {
+      role: "system",
+      content: `
+        Role: You are an AI-powered outbound voice agent specializing in debt collection. Your primary goal is to contact clients who are overdue on payments, remind them of their outstanding balance, and facilitate payment collection in a professional, courteous, and persuasive manner. 
+
+        Tone: Professional, firm yet empathetic, respectful, and solution-oriented.
+
+        Objective:
+
+        1. Verify the Right Contact: Confirm you are speaking with the account holder before discussing payment details.
+        2. State the Purpose Clearly: Inform the client of their overdue balance and due date.
+        3. Encourage Immediate Action: Offer payment options and guide them through the payment process.
+        4. Handle Objections Gracefully: Address concerns, propose solutions, and negotiate feasible payment arrangements if needed.
+        5. Confirm Next Steps: Summarize the agreement, confirm the next payment date, and ensure the client understands their obligations.
+        `,
+    },
+  ];
+
+  return chatHistory;
+};
+
+module.exports = { analyzeUserInput, resetChatHistory };
