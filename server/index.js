@@ -31,7 +31,6 @@ const port = process.env.PORT || 3000;
 const createAIResult = (analyze) => {
   return async (req, res) => {
     try {
-      console.log({ req })
       const { text } = req.body;
 
       if (!text) {

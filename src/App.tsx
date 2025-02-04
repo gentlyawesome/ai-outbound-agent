@@ -31,9 +31,7 @@ function App() {
           <button
             className="bg-gray-500 text-white py-4 px-2 rounded cursor-pointer hover:bg-blue-500 active:bg-green-500"
             ref={buttonRef}
-            onTouchStart={startListening}
             onMouseDown={startListening}
-            onTouchEnd={SpeechRecognition.stopListening}
             onMouseUp={SpeechRecognition.stopListening}
           >
             Hold to talk

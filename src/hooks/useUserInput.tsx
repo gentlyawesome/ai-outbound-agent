@@ -16,7 +16,6 @@ export const useUserInput = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [result, setResult] = useState<string>("");
   const [userInput, setUserInput] = useState<string>("");
-  const [utterance, setUtterance] = useState<SpeechSynthesisUtterance>(null);
 
   const {
     transcript,
@@ -51,10 +50,6 @@ export const useUserInput = () => {
     };
 
     document.addEventListener("mouseup", handleMouseUp);
-
-    if (userInput.length > 0) {
-      mutate(userInput);
-    }
   }, [buttonRef, transcript, mutate, userInput, setUserInput]);
 
   return {
